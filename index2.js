@@ -7,7 +7,7 @@ var nano = require("nano")(server),
 
 var app = express.createServer();
 var db = nano.db.use("registry");
-app.listen(80);
+app.listen(8080);
 
 var adjustTarball = function(version) {
   version.dist.tarball = version.dist.tarball.replace("registry.npmjs.org", fetchServer);
@@ -27,10 +27,10 @@ app.get('/:doc/:at', function(req, res) {
             adjustTarball(version);
           }
 
-          req.send(version);
+          res.send(version);
         }
         else {
-          req.send("notfound");
+          res.send("notfound");
         }
       }
     });
